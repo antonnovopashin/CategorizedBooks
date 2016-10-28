@@ -1,18 +1,18 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace BooksBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @Route("/default")
+ * @Route("/public")
  */
-class DefaultController extends Controller
+class PublicController extends Controller
 {
     /**
-     * @Route("/d", name="defaultHomepage")
+     * @Route("/", name="publicHomepage")
      */
     public function indexAction(Request $request)
     {
