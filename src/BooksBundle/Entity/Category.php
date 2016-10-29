@@ -48,7 +48,7 @@ class Category
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="Book", mappedBy="category")
+     * @ORM\OneToMany(targetEntity="Book", mappedBy="category", cascade={"persist", "remove"})
      */
     private $books;
     /**
