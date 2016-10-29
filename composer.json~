@@ -23,7 +23,7 @@
         "incenteev/composer-parameter-handler": "~2.0",
 	"stof/doctrine-extensions-bundle": "*",
 	"doctrine/doctrine-migrations-bundle": "dev-master",
-	"beberlei/DoctrineExtensions": "*"
+	"beberlei/DoctrineExtensions": "*",
     },
     "require-dev": {
         "sensio/generator-bundle": "~3.0",

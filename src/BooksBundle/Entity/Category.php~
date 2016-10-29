@@ -1,0 +1,51 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: anton
+ * Date: 28.10.16
+ * Time: 12:08
+ */
+
+namespace BooksBundle\Entity;
+
+use BooksBundle\Entity\Book;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Category entity
+ *
+ * @ORM\Entity
+ * @ORM\Table(name="category")
+ */
+class Category
+{
+    /**
+     * @var integer
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="datetime",nullable=true, name="updated_at")
+     */
+    private $updatedAt;
+
+    /**
+     * @ORM\Column(type="datetime",nullable=true, name="created_at")
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\Column(type="string",name="name", nullable=true)
+     *
+     * Nazvanie
+     */
+    private $name;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Book", mappedBy="category")
+     */
+    private $books;
+}
