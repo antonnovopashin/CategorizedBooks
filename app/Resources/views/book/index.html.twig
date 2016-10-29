@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Books list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Updatedat</th>
+                <th>Createdat</th>
+                <th>Name</th>
+                <th>Publicationyear</th>
+                <th>Author</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for book in books %}
+            <tr>
+                <td><a href="{{ path('book_show', { 'id': book.id }) }}">{{ book.id }}</a></td>
+                <td>{% if book.updatedAt %}{{ book.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if book.createdAt %}{{ book.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ book.name }}</td>
+                <td>{{ book.publicationYear }}</td>
+                <td>{{ book.author }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('book_show', { 'id': book.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('book_edit', { 'id': book.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('book_new') }}">Create a new book</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,3 +1,11 @@
+books_category:
+    resource: "@BooksBundle/Controller/CategoryController.php"
+    type:     annotation
+
+books_book:
+    resource: "@BooksBundle/Controller/BookController.php"
+    type:     annotation
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
