@@ -3,13 +3,14 @@
 {% block body %}
     <h1>Список книг</h1>
 
-    <table>
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Название</th>
                 <th>Год публикации</th>
                 <th>Имя автора</th>
+                <th>Категория</th>
                 <th></th>
             </tr>
         </thead>
@@ -20,15 +21,12 @@
                 <td>{{ book.name }}</td>
                 <td>{{ book.publicationYear }}</td>
                 <td>{{ book.author }}</td>
+                <td>{{ book.category.name }}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('book_show', { 'id': book.id }) }}">посмотреть</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('book_edit', { 'id': book.id }) }}">редактировать</a>
-                        </li>
-                    </ul>
+                    <a href="{{ path('book_show', { 'id': book.id }) }}" class="btn btn-xs btn-info">посмотреть</a>
+                </td>
+                <td>
+                    <a href="{{ path('book_edit', { 'id': book.id }) }}" class="btn btn-xs btn-info">редактировать</a>
                 </td>
             </tr>
         {% endfor %}
@@ -37,7 +35,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('book_new') }}">Новая книга</a>
+            <a href="{{ path('book_new') }}" class="btn btn-success">Новая книга</a>
         </li>
     </ul>
 {% endblock %}
