@@ -64,13 +64,18 @@ class CategoryController extends Controller
      * @Route("/{id}", name="category_show")
      * @Method("GET")
      */
-    public function showAction(Category $category)
+    public function showAction($id)
     {
-        $deleteForm = $this->createDeleteForm($category);
+        $category = $this->getDoctrine()->getManager()->getRepository(Category::class)->findOneBy(['id' => $id]);
+
+        if($category) {
+            $deleteForm = $this->createDeleteForm($category);
+        }
 
         return $this->render('category/show.html.twig', array(
+            'id' => $id,
             'category' => $category,
-            'delete_form' => $deleteForm->createView(),
+            'delete_form' => isset($deleteForm) ? $deleteForm->createView() : null,
         ));
     }
 
@@ -80,22 +85,27 @@ class CategoryController extends Controller
      * @Route("/{id}/edit", name="category_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Category $category)
+    public function editAction(Request $request, $id)
     {
-        $deleteForm = $this->createDeleteForm($category);
-        $editForm = $this->createForm('BooksBundle\Form\CategoryType', $category);
-        $editForm->handleRequest($request);
+        $category = $this->getDoctrine()->getManager()->getRepository(Category::class)->findOneBy(['id' => $id]);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+        if($category) {
+            $deleteForm = $this->createDeleteForm($category);
+            $editForm = $this->createForm('BooksBundle\Form\CategoryType', $category);
+            $editForm->handleRequest($request);
 
-            return $this->redirectToRoute('category_edit', array('id' => $category->getId()));
+            if ($editForm->isSubmitted() && $editForm->isValid()) {
+                $this->getDoctrine()->getManager()->flush();
+
+                return $this->redirectToRoute('category_edit', array('id' => $category->getId()));
+            }
         }
 
         return $this->render('category/edit.html.twig', array(
+            'id' => $id,
             'category' => $category,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'edit_form' => isset($editForm) ? $editForm->createView() : null,
+            'delete_form' => isset($deleteForm) ? $deleteForm->createView() : null,
         ));
     }
 

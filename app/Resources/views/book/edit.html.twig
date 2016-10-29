@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    {% if book is not null %}
     <h1>Редактирование книги</h1>
 
     {{ form_start(edit_form) }}
@@ -12,5 +13,9 @@
     {{ form_start(delete_form) }}
         <input type="submit" value="Удалить"  class="btn btn-danger">
     {{ form_end(delete_form) }}
+    {% else %}
+        <h1>Книга с идентификатором {{ id }} не найдена</h1>
+        <a href="{{ path('book_index') }}" class="btn btn-default">Назад к списку книг</a>
+    {% endif %}
 
 {% endblock %}

@@ -1,40 +1,45 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Книга: {{ book.name }}</h1>
+    {% if book is not null %}
+        <h1>Книга: {{ book.name }}</h1>
 
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ book.id }}</td>
-            </tr>
-            <tr>
-                <th>Название</th>
-                <td>{{ book.name }}</td>
-            </tr>
-            <tr>
-                <th>Год публикацции</th>
-                <td>{{ book.publicationYear }}</td>
-            </tr>
-            <tr>
-                <th>Автор</th>
-                <td>{{ book.author }}</td>
-            </tr>
-        </tbody>
-    </table>
+        <table>
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ book.id }}</td>
+                </tr>
+                <tr>
+                    <th>Название</th>
+                    <td>{{ book.name }}</td>
+                </tr>
+                <tr>
+                    <th>Год публикацции</th>
+                    <td>{{ book.publicationYear }}</td>
+                </tr>
+                <tr>
+                    <th>Автор</th>
+                    <td>{{ book.author }}</td>
+                </tr>
+            </tbody>
+        </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('book_index') }}">Назад к списку книг</a>
-        </li>
-        <li>
-            <a href="{{ path('book_edit', { 'id': book.id }) }}">Редактировать</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+        <ul>
+            <li>
+                <a href="{{ path('book_index') }}" class="btn btn-default">Назад к списку книг</a>
+            </li>
+            <li>
+                <a href="{{ path('book_edit', { 'id': book.id }) }}" class="btn btn-default">Редактировать</a>
+            </li>
+            <li>
+                {{ form_start(delete_form) }}
+                    <input type="submit" value="Удалить">
+                {{ form_end(delete_form) }}
+            </li>
+        </ul>
+    {% else %}
+        <h1>Книга с идентификатором {{ id }} не найдена</h1>
+        <a href="{{ path('book_index') }}" class="btn btn-default">Назад к списку книг</a>
+    {% endif %}
 {% endblock %}

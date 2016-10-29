@@ -1,17 +1,21 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Редактирование категории</h1>
+    {% if category is not null %}
+        <h1>Редактирование категории</h1>
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Сохранить" />
-    {{ form_end(edit_form) }}
+        {{ form_start(edit_form) }}
+            {{ form_widget(edit_form) }}
+            <input type="submit" value="Сохранить" />
+        {{ form_end(edit_form) }}
 
-    <a href="{{ path('category_index') }}" class="btn btn-default">Назад к списку категорий</a>
+        <a href="{{ path('category_index') }}" class="btn btn-default">Назад к списку категорий</a>
 
-    {{ form_start(delete_form) }}
-        <input type="submit" value="Удалить" class="brn btn-danger">
-    {{ form_end(delete_form) }}
-
+        {{ form_start(delete_form) }}
+            <input type="submit" value="Удалить" class="brn btn-danger">
+        {{ form_end(delete_form) }}
+    {% else %}
+        <h1>Категория с идентификатором {{ id }} не найдена</h1>
+        <a href="{{ path('category_index') }}" class="btn btn-default">Назад к списку категорий</a>
+    {% endif %}
 {% endblock %}

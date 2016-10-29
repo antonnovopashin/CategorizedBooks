@@ -64,13 +64,18 @@ class BookController extends Controller
      * @Route("/{id}", name="book_show")
      * @Method("GET")
      */
-    public function showAction(Book $book)
+    public function showAction($id)
     {
-        $deleteForm = $this->createDeleteForm($book);
+        $book = $this->getDoctrine()->getManager()->getRepository(Book::class)->findOneBy(['id' => $id]);
+
+        if($book) {
+            $deleteForm = $this->createDeleteForm($book);
+        }
 
         return $this->render('book/show.html.twig', array(
+            'id' => $id,
             'book' => $book,
-            'delete_form' => $deleteForm->createView(),
+            'delete_form' => isset($deleteForm) ? $deleteForm->createView() : null,
         ));
     }
 
@@ -80,22 +85,27 @@ class BookController extends Controller
      * @Route("/{id}/edit", name="book_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Book $book)
+    public function editAction(Request $request, $id)
     {
-        $deleteForm = $this->createDeleteForm($book);
-        $editForm = $this->createForm('BooksBundle\Form\BookType', $book);
-        $editForm->handleRequest($request);
+        $book = $this->getDoctrine()->getManager()->getRepository(Book::class)->findOneBy(['id' => $id]);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+        if($book) {
+            $deleteForm = $this->createDeleteForm($book);
+            $editForm = $this->createForm('BooksBundle\Form\BookType', $book);
+            $editForm->handleRequest($request);
 
-            return $this->redirectToRoute('book_edit', array('id' => $book->getId()));
+            if ($editForm->isSubmitted() && $editForm->isValid()) {
+                $this->getDoctrine()->getManager()->flush();
+
+                return $this->redirectToRoute('book_edit', array('id' => $book->getId()));
+            }
         }
 
         return $this->render('book/edit.html.twig', array(
+            'id' => $id,
             'book' => $book,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'edit_form' => isset($editForm) ? $editForm->createView() : null,
+            'delete_form' => isset($deleteForm) ? $deleteForm->createView() : null,
         ));
     }
 
