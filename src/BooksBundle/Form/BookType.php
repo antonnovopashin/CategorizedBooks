@@ -14,13 +14,19 @@ class BookType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name')
-                ->add('publicationYear')
-                ->add('author')
-                //->add('category')
+        $builder->add('name', 'text', array(
+                    'label' => 'Название',
+                ))
+                ->add('publicationYear', 'text', array(
+                    'label' => 'Год публикации',
+                ))
+                ->add('author', 'text', array(
+                    'label' => 'Автор',
+                ))
                 ->add('category', EntityType::class, array(
                     'class' => 'BooksBundle:Category',
                     'choice_label' => 'name',
+                    'label' => 'Категория',
                 ))
         ;
     }

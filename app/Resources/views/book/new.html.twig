@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Book creation</h1>
+    <h1>Новая книга</h1>
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
@@ -10,7 +10,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('book_index') }}">Back to the list</a>
+            <a href="{{ path('book_index') }}">Назад к списку книг</a>
         </li>
     </ul>
 {% endblock %}

@@ -1,36 +1,32 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Books list</h1>
+    <h1>Список книг</h1>
 
     <table>
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Updatedat</th>
-                <th>Createdat</th>
-                <th>Name</th>
-                <th>Publicationyear</th>
-                <th>Author</th>
-                <th>Actions</th>
+                <th>Название</th>
+                <th>Год публикации</th>
+                <th>Имя автора</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
         {% for book in books %}
             <tr>
                 <td><a href="{{ path('book_show', { 'id': book.id }) }}">{{ book.id }}</a></td>
-                <td>{% if book.updatedAt %}{{ book.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if book.createdAt %}{{ book.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{{ book.name }}</td>
                 <td>{{ book.publicationYear }}</td>
                 <td>{{ book.author }}</td>
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('book_show', { 'id': book.id }) }}">show</a>
+                            <a href="{{ path('book_show', { 'id': book.id }) }}">посмотреть</a>
                         </li>
                         <li>
-                            <a href="{{ path('book_edit', { 'id': book.id }) }}">edit</a>
+                            <a href="{{ path('book_edit', { 'id': book.id }) }}">редактировать</a>
                         </li>
                     </ul>
                 </td>
@@ -41,7 +37,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('book_new') }}">Create a new book</a>
+            <a href="{{ path('book_new') }}">Новая книга</a>
         </li>
     </ul>
 {% endblock %}

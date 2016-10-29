@@ -1,32 +1,27 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Categories list</h1>
+    <h1>Список категорий</h1>
 
     <table>
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Updatedat</th>
-                <th>Createdat</th>
-                <th>Name</th>
-                <th>Actions</th>
+                <th>Название</th>
             </tr>
         </thead>
         <tbody>
         {% for category in categories %}
             <tr>
                 <td><a href="{{ path('category_show', { 'id': category.id }) }}">{{ category.id }}</a></td>
-                <td>{% if category.updatedAt %}{{ category.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if category.createdAt %}{{ category.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{{ category.name }}</td>
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('category_show', { 'id': category.id }) }}">show</a>
+                            <a href="{{ path('category_show', { 'id': category.id }) }}">посмотреть</a>
                         </li>
                         <li>
-                            <a href="{{ path('category_edit', { 'id': category.id }) }}">edit</a>
+                            <a href="{{ path('category_edit', { 'id': category.id }) }}">редактировать</a>
                         </li>
                     </ul>
                 </td>
@@ -37,7 +32,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('category_new') }}">Create a new category</a>
+            <a href="{{ path('category_new') }}">Создать нову категорию</a>
         </li>
     </ul>
 {% endblock %}
